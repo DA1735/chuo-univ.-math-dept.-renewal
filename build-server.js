@@ -11,7 +11,7 @@ esbuild.build({
     outfile: 'build/server.js',
     platform: 'node',
     target: 'node18',
-    format: 'esm',
+    format: 'cjs',
     // 全ての依存をバンドルに含める（Pleskで npm install 不要にするため）
 }).then(() => {
     console.log('✅ バックエンドのビルドが完了しました。出力先: build/server.js');
