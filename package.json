@@ -9,7 +9,7 @@
     "db:setup": "tsx scripts/setup-db.ts",
     "db:seed": "tsx scripts/seed-db.ts",
     "build:client": "vite build",
-    "build:server": "pnpm-lock-to-npm-lock pnpm-lock.yaml && node build-server.js",
+    "build:server": "node build-server.js",
     "build": "pnpm build:client && pnpm build:server",
     "preview": "vite preview"
   },

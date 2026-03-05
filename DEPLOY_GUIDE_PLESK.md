@@ -110,8 +110,7 @@ FTPソフト等を使用して、Pleskのドキュメントルート（例: `htt
 *   ✅ **`dist/` フォルダ （フォルダごとそのまま）**
 *   ✅ `server.js`
 *   ✅ `package.json`
-*   ✅ `package-lock.json` （Plesk環境のNPMインストール用）
-*   ✅ `pnpm-lock.yaml` (アップロードしなくても問題ありません)
+*   ✅ `pnpm-lock.yaml` （Plesk環境の pnpm install 用）
 
 #### 📝 アップロード後のディレクトリ構成イメージ
 以下のような階層になっていれば正解です。
@@ -123,8 +122,7 @@ httpdocs/ <--- ドキュメントルート
   │   ├── pdf/
   │   └── index.html
   ├── package.json
-  ├── package-lock.json    # 重要：npmインストール用
-  ├── pnpm-lock.yaml       # (存在していても無視されます)
+  ├── pnpm-lock.yaml       # 重要：pnpm install用
   └── server.js
 ```
 
@@ -141,6 +139,13 @@ httpdocs/ <--- ドキュメントルート
     *   `DB_PASSWORD` : 作成したDBパスワード
     *   `DB_NAME` : 作成したデータベース名
 4.  画面上の **「NPM インストール」** ボタンをクリック。
+    *   ⚠️ Pleskの「NPMインストール」ボタンは内部で `npm install` を実行しますが、`pnpm-lock.yaml` があるため pnpm でインストールする必要があります。
+    *   Pleskの画面で **「NPM インストール」** の代わりに **SSH** からコマンドを実行する場合：
+    ```bash
+    cd /var/www/vhosts/math.v.chuo-u.ac.jp/httpdocs
+    npm install -g pnpm  # pnpm が入っていない場合のみ
+    pnpm install --frozen-lockfile --prod
+    ```
 5.  画面上の **「アプリケーションの再起動」** ボタンをクリック。
 
 これで本番環境へのデプロイは完了です！本番URLにアクセスして動作を確認してください。

@@ -15,8 +15,6 @@ esbuild.build({
     format: 'esm',
 }).then(() => {
     fs.copyFileSync('package.json', 'build/package.json');
-    if (fs.existsSync('package-lock.json')) {
-        fs.copyFileSync('package-lock.json', 'build/package-lock.json');
-    }
+    fs.copyFileSync('pnpm-lock.yaml', 'build/pnpm-lock.yaml');
     console.log('✅ バックエンドのビルドとパッケージのコピーが完了しました。出力先: build/');
 }).catch(() => process.exit(1))
