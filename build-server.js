@@ -14,5 +14,14 @@ esbuild.build({
     format: 'cjs',
     // 全ての依存をバンドルに含める（Pleskで npm install 不要にするため）
 }).then(() => {
-    console.log('✅ バックエンドのビルドが完了しました。出力先: build/server.js');
+    // Pleskは npm start でアプリを起動するため、最小限の package.json を生成
+    const prodPackageJson = {
+        name: "chuo-math-server",
+        private: true,
+        scripts: {
+            start: "node server.js"
+        }
+    };
+    fs.writeFileSync('build/package.json', JSON.stringify(prodPackageJson, null, 2));
+    console.log('✅ バックエンドのビルドが完了しました。出力先: build/');
 }).catch(() => process.exit(1))

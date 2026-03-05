@@ -110,8 +110,9 @@ FTPソフト等を使用して、Pleskのドキュメントルート（例: `htt
 
 *   ✅ **`dist/` フォルダ （フォルダごとそのまま）**
 *   ✅ `server.js`
+*   ✅ `package.json` （`npm start` 用の起動設定。自動生成されます）
 
-> 💡 `package.json` や `pnpm-lock.yaml` のアップロードは不要です。全依存が `server.js` にバンドルされています。
+> 💡 `npm install` は不要です。全依存が `server.js` にバンドルされています。
 
 #### 📝 アップロード後のディレクトリ構成イメージ
 以下のような階層になっていれば正解です。
@@ -122,6 +123,7 @@ httpdocs/ <--- ドキュメントルート
   │   ├── images/
   │   ├── pdf/
   │   └── index.html
+  ├── package.json         # npm start 用（自動生成）
   └── server.js            # 全依存バンドル済み
 ```
 
