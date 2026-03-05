@@ -1,31 +1,25 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
 import { cors } from 'hono/cors'
+import { serveStatic } from '@hono/node-server/serve-static'
+import * as path from 'path'
+import * as fs from 'fs'
 import { pool } from './db'
 
 const app = new Hono()
 
 app.use('/api/*', cors())
 
-app.get('/', (c) => {
-    return c.html(
-        <html>
-            <head>
-                <title>Chuo Math Backend API</title>
-                <meta charset="utf-8" />
-                <style>
-                    {`
-            body { font-family: sans-serif; padding: 2rem; }
-            h1 { color: #333; }
-          `}
-                </style>
-            </head>
-            <body>
-                <h1>Chuo Math Backend API is running!</h1>
-                <p>This is a Hono JSX backend server.</p>
-            </body>
-        </html>
-    )
+// Serve static files from the React frontend build (dist directory)
+app.use('/*', serveStatic({ root: './dist' }))
+
+// SPA fallback: For any other route, serve index.html (if it exists)
+app.notFound((c) => {
+    const indexPath = path.resolve('./dist/index.html')
+    if (fs.existsSync(indexPath)) {
+        return c.html(fs.readFileSync(indexPath, 'utf-8'))
+    }
+    return c.text('Not Found', 404)
 })
 
 app.get('/api/health', (c) => {

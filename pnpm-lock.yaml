@@ -39,6 +39,12 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^5.0.0
         version: 5.1.4(vite@6.4.1(@types/node@22.19.12)(tsx@4.21.0))
+      esbuild:
+        specifier: ^0.27.3
+        version: 0.27.3
+      pnpm-lock-to-npm-lock:
+        specifier: ^1.0.0
+        version: 1.0.0
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -798,6 +804,10 @@ packages:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
 
+  pnpm-lock-to-npm-lock@1.0.0:
+    resolution: {integrity: sha512-WaVqEcv+Sm2kTHhCNoc12X8HCalIp9AIq1+Yjb6cW1irOsbcHWR/njz4NAcHPxCbGWLY2GTtdstVg6rT8fsD2g==}
+    hasBin: true
+
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -929,6 +939,10 @@ packages:
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
+
+  yaml@2.2.2:
+    resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
+    engines: {node: '>= 14'}
 
 snapshots:
 
@@ -1509,6 +1523,10 @@ snapshots:
 
   picomatch@4.0.3: {}
 
+  pnpm-lock-to-npm-lock@1.0.0:
+    dependencies:
+      yaml: 2.2.2
+
   postcss@8.5.6:
     dependencies:
       nanoid: 3.3.11
@@ -1621,3 +1639,5 @@ snapshots:
       tsx: 4.21.0
 
   yallist@3.1.1: {}
+
+  yaml@2.2.2: {}

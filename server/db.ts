@@ -1,11 +1,11 @@
 import mysql from 'mysql2/promise';
 
 export const pool = mysql.createPool({
-    host: 'localhost',
-    port: 3308,
-    user: 'chuo',
-    password: 'chuopass',
-    database: 'chuo_math',
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '3308', 10),
+    user: process.env.DB_USER || 'chuo',
+    password: process.env.DB_PASSWORD || 'chuopass',
+    database: process.env.DB_NAME || 'chuo_math',
     waitForConnections: true,
     connectionLimit: 10,
     maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`

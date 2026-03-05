@@ -5,7 +5,15 @@ import { ArrowLeft, Calendar, MapPin, AlertCircle, Info } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Breadcrumbs from '../components/Breadcrumbs'; // 実際のパスに合わせて調整してください
 
-// データ型の定義（通常は types.ts にあるものを利用）
+// ================================================================
+// 【使い方】
+// 1. このファイルを pages/ にコピーしてリネーム
+// 2. ItemData の型を types.ts の実際の型（例: UnifiedEvent）に置き換え
+// 3. fetchItemById() を api.ts の実際の関数（例: fetchEncounter）に置き換え
+// 4. App.tsx にルーティングを追加（例: <Route path="/sample/:id" element={<DetailPage />} />）
+// ================================================================
+
+// データ型の定義（実際には types.ts に定義されている型を import して使用してください）
 interface ItemData {
   id: number;
   title: string;
@@ -14,32 +22,44 @@ interface ItemData {
   location?: string;
 }
 
-// モックデータ取得関数（通常は data/xxx.ts からインポート）
-const getSampleDataById = (id: number): ItemData | undefined => {
-  // ダミーデータ
-  if (id === 1) return { 
-    id: 1, 
-    title: "詳細ページのサンプル", 
-    date: "2025.04.01", 
-    content: "これは詳細ページの本文サンプルです。",
-    location: "後楽園キャンパス 6号館"
-  };
-  return undefined;
+// データ取得関数の例（実際には api.ts から import して使用してください）
+// 例: import { fetchEncounter } from '../api';
+const fetchItemById = async (id: string | number): Promise<ItemData | null> => {
+  // TODO: api.ts の関数に置き換えてください
+  // 例: const res = await fetch(`/api/encounters/${id}`); return res.json();
+  if (Number(id) === 1) {
+    return {
+      id: 1,
+      title: "詳細ページのサンプル",
+      date: "2025.04.01",
+      content: "これは詳細ページの本文サンプルです。APIから取得したデータが表示されます。",
+      location: "後楽園キャンパス 6号館"
+    };
+  }
+  return null;
 };
 
 const DetailPageTemplate: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // URLパラメータからIDを取得
+
+  // --- データ取得（API経由） ---
   const [data, setData] = useState<ItemData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // データの読み込み処理
   useEffect(() => {
     if (id) {
-      // 実際には非同期処理やAPIコールになる可能性があります
-      const result = getSampleDataById(parseInt(id));
-      setData(result || null);
+      fetchItemById(id)
+        .then((result) => {
+          setData(result);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Failed to fetch data:', err);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, [id]);
 
   // ローディング表示
@@ -69,7 +89,7 @@ const DetailPageTemplate: React.FC = () => {
       <div className="relative bg-white pt-32 pb-20 border-b border-gray-100 overflow-hidden">
         {/* 背景装飾（斜め線） */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 -skew-x-12 opacity-50 pointer-events-none"></div>
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <Breadcrumbs dark />
           <motion.div
@@ -103,10 +123,10 @@ const DetailPageTemplate: React.FC = () => {
       {/* --- メインコンテンツ --- */}
       <div className="container mx-auto px-6 mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
+
           {/* 左カラム：メインテキスト */}
           <div className="lg:col-span-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}

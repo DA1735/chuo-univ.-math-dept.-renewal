@@ -8,7 +8,9 @@
     "dev:server": "tsx watch server/index.tsx",
     "db:setup": "tsx scripts/setup-db.ts",
     "db:seed": "tsx scripts/seed-db.ts",
-    "build": "vite build",
+    "build:client": "vite build",
+    "build:server": "pnpm-lock-to-npm-lock pnpm-lock.yaml && node build-server.js",
+    "build": "pnpm build:client && pnpm build:server",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -24,6 +26,8 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "esbuild": "^0.27.3",
+    "pnpm-lock-to-npm-lock": "^1.0.0",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"

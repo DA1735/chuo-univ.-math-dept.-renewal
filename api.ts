@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:3001/api';
+/// <reference types="vite/client" />
+// Production build uses relative path '/api' to be served by the same host.
+// Development mode uses localhost:3001.
+const API_BASE_URL = import.meta.env.PROD ? '/api' : 'http://localhost:3001/api';
 
 export const fetchNews = async () => {
     const res = await fetch(`${API_BASE_URL}/news`);
