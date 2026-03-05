@@ -11,10 +11,8 @@ esbuild.build({
     outfile: 'build/server.js',
     platform: 'node',
     target: 'node18',
-    external: ['mysql2'], // ネイティブ依存を含む可能性のあるモジュールはバンドルから除外し、環境側（PleskのNPMインストール）で解決させます
     format: 'esm',
+    // 全ての依存をバンドルに含める（Pleskで npm install 不要にするため）
 }).then(() => {
-    fs.copyFileSync('package.json', 'build/package.json');
-    fs.copyFileSync('pnpm-lock.yaml', 'build/pnpm-lock.yaml');
-    console.log('✅ バックエンドのビルドとパッケージのコピーが完了しました。出力先: build/');
+    console.log('✅ バックエンドのビルドが完了しました。出力先: build/server.js');
 }).catch(() => process.exit(1))
