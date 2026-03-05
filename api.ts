@@ -9,12 +9,6 @@ export const fetchNews = async () => {
     return res.json();
 };
 
-export const fetchEncounters = async () => {
-    const res = await fetch(`${API_BASE_URL}/encounters`);
-    if (!res.ok) throw new Error('Failed to fetch encounters');
-    return res.json();
-};
-
 export const fetchEwmSub = async () => {
     const res = await fetch(`${API_BASE_URL}/ewm-sub`);
     if (!res.ok) throw new Error('Failed to fetch ewm-sub');
@@ -36,11 +30,5 @@ export const fetchStaff = async () => {
 export const fetchSeminars = async (category: string) => {
     const res = await fetch(`${API_BASE_URL}/seminars/${category}`);
     if (!res.ok) throw new Error(`Failed to fetch seminars for ${category}`);
-    return res.json();
-};
-
-export const fetchEncounter = async (id: string | number) => {
-    const res = await fetch(`${API_BASE_URL}/encounters/${id}`);
-    if (!res.ok) throw new Error('Failed to fetch encounter');
     return res.json();
 };

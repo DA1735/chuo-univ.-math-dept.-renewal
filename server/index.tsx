@@ -35,25 +35,7 @@ app.get('/api/news', async (c) => {
     }
 })
 
-app.get('/api/encounters', async (c) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM encounters ORDER BY number ASC');
-        return c.json(rows);
-    } catch (err) {
-        return c.json({ error: 'Failed to fetch encounters' }, 500);
-    }
-})
 
-app.get('/api/encounters/:id', async (c) => {
-    const id = c.req.param('id');
-    try {
-        const [rows]: any = await pool.query('SELECT * FROM encounters WHERE number = ?', [id]);
-        if (rows.length === 0) return c.json({ error: 'Not found' }, 404);
-        return c.json(rows[0]);
-    } catch (err) {
-        return c.json({ error: 'Failed to fetch encounter' }, 500);
-    }
-})
 
 app.get('/api/ewm-sub', async (c) => {
     try {

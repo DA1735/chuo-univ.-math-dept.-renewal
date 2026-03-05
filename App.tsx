@@ -14,7 +14,6 @@ import MeigniezLectures from './pages/seminar/MeigniezLectures';
 import SpecialLectures from './pages/seminar/SpecialLectures';
 import Workshops from './pages/seminar/Workshops';
 import EwM from './pages/seminar/EwM';
-import SeminarDetail from './pages/SeminarDetail';
 import InternalServices from './pages/InternalServices';
 import Links from './pages/Links';
 import NewsList from './pages/NewsList';
@@ -54,7 +53,6 @@ const App: React.FC = () => {
 
           {/* ENCOUNTERwithMATHEMATICS Routes moved under /seminar */}
           <Route path="/seminar/ENCwMATH" element={<EwM />} />
-          <Route path="/seminar/ENCwMATH/:id" element={<SeminarDetail />} />
           <Route path="/seminar/ENCwMATH/morita" element={<MoritaLectures />} />
           <Route path="/seminar/ENCwMATH/meigniez" element={<MeigniezLectures />} />
 
