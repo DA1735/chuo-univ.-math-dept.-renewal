@@ -24,6 +24,10 @@ export const MORITA_DATA = {
   affiliation: "東京大学 名誉教授",
   theme: "特性類と不変量",
   intro: "微分トポロジーの研究と展望等について、森田茂之氏に自由に講演していただきます。",
+  documents: [
+    { title: "第1シリーズ 講義ノート", url: "/pdf/lecture_notes_morita.pdf" },
+    { title: "新シリーズ 講義ノート", url: "/pdf/lecture_notes_morita2.pdf" }
+  ],
   series1: {
     title: "第1シリーズ：曲面からモジュライ空間へ",
     period: "2010年5月 〜 2013年7月",

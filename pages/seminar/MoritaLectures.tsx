@@ -62,6 +62,29 @@ const MoritaLectures: React.FC = () => {
           <p className="text-gray-700 text-lg leading-relaxed font-serif">
             {MORITA_DATA.intro}
           </p>
+
+          {MORITA_DATA.documents && MORITA_DATA.documents.length > 0 && (
+            <div className="mt-6 pt-6 border-t border-gray-100">
+              <h3 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <BookOpen size={18} className="text-chuo-blue" />
+                講義ノート・関連資料
+              </h3>
+              <div className="flex flex-wrap gap-4">
+                {MORITA_DATA.documents.map((doc, idx) => (
+                  <a
+                    key={idx}
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-gray-50 border border-gray-200 px-4 py-2 rounded-sm text-chuo-blue hover:bg-chuo-blue hover:text-white transition-colors text-sm font-medium"
+                  >
+                    <Download size={16} />
+                    {doc.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
 
         {/* Series 2 (New) */}
